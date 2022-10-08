@@ -57,7 +57,15 @@ void mean(int arr[], int a, int b){ // функция для поиска сре
     cout << '\n' << "Amount such of elements : " << count <<'\n';
     SetConsoleTextAttribute(hConsole, 15);
 }
-
+void arr_exchange(int arr[], int a, int b ){
+    arr_out(arr);
+    auto start_4 = chrono::high_resolution_clock::now();
+    swap(arr[a],arr[b]);
+    auto finish_4 = chrono::high_resolution_clock::now();
+    chrono :: duration <float> duration_4 = finish_4 - start_4;
+    arr_out(arr);
+    cout << "Time to exchange = " << duration_4.count() << " s" <<'\n';
+}
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "cert-msc51-cpp"
 int main() {
@@ -76,7 +84,7 @@ int main() {
 
     arr_out(arr);
 
-    max_min_value(arr);
+    max_min_value(arr_1);
 
     auto start_1 = chrono::high_resolution_clock::now();
     arr_sorting(arr, 99 , 0);
@@ -104,7 +112,7 @@ int main() {
     cout << '\t' <<"Enter the number a (task 5)"<< '\n';
     SetConsoleTextAttribute(hConsole, 15);
     cin >> a;
-    for (int i = 0; i < 100; i++){
+    for(int i = 0; i < 100; i++){
         if (arr[i] < a){
             count++;
         }
@@ -115,12 +123,70 @@ int main() {
     cout << '\t' <<"Enter the number b (task 6)"<< '\n';
     SetConsoleTextAttribute(hConsole, 15);
     cin >> b;
-    for (int i = 0; i < 100; i++){
+    for(int i = 0; i < 100; i++){
         if (arr[i] > b){
             count++;
         }
     }
     cout << "Amount of elements which are more \"b\" : " << count <<'\n';
+
+    SetConsoleTextAttribute(hConsole, 14);
+    cout << '\t' << "Enter the number (task 7)"<< '\n';
+    SetConsoleTextAttribute(hConsole, 15);
+    int a_1, l = 0, r = 99, mid = 0;
+    bool b_1 = false;
+    cin >> a_1;
+    auto start_2 = chrono ::high_resolution_clock :: now();
+    while((not(b_1)) && (l <= r)){
+        mid = (l + r) / 2;
+        if (arr[mid] == a_1) b_1 = true;
+        if (arr[mid] > a_1) r = mid - 1;
+        else l = mid + 1;
+    }
+
+    if (b_1){
+        SetConsoleTextAttribute(hConsole,10);
+        cout <<"Binary search :" <<'\t'<<  "Value found"<< '\n';
+        SetConsoleTextAttribute(hConsole,15);
+    }
+    else {
+        SetConsoleTextAttribute(hConsole,12);
+        cout <<"Binary search :" << '\t' << "Value not found"<< '\n';
+        SetConsoleTextAttribute(hConsole,15);
+    }
+    auto finish_2 = chrono ::high_resolution_clock :: now();
+    chrono :: duration <float> duration_2 = finish_2 - start_2;
+    SetConsoleTextAttribute(hConsole,9);
+    cout <<"Binary search time = " << duration_2.count() << " s" << '\n';
+    SetConsoleTextAttribute(hConsole,15);
+    b_1 = false;
+    auto start_3 = chrono ::high_resolution_clock :: now();
+    for(int i = 0; i < 100;i ++){
+        if (arr[i] == a_1){
+            b_1 = true;
+        }
+    }
+    if (b_1){
+        SetConsoleTextAttribute(hConsole,10);
+        cout <<  "Enumiration search :" <<" Value found"<< '\n';
+        SetConsoleTextAttribute(hConsole,15);
+    }
+    else {
+        SetConsoleTextAttribute(hConsole, 12);
+        cout << "Enumiration search :" << " Value not found"<< '\n';
+        SetConsoleTextAttribute(hConsole, 15);
+    }
+    auto finish_3 = chrono ::high_resolution_clock :: now();
+    chrono :: duration <float> duration_3 = finish_3 - start_3;
+    SetConsoleTextAttribute(hConsole,9);
+    cout <<"Enumeration time = " << duration_3.count() << " s" << '\n';
+    SetConsoleTextAttribute(hConsole,15);
+    int i1, i2;
+    SetConsoleTextAttribute(hConsole, 14);
+    cout << '\t' << "Enter numbers (task 8)"<< '\n';
+    SetConsoleTextAttribute(hConsole, 15);
+    cin >> i1 >> i2;
+    arr_exchange(arr, i1, i2);
     return 0;
 }
 #pragma clang diagnostic pop
